@@ -37,7 +37,14 @@ SOFTWARE.
 /* Private variables */
 /* Private function prototypes */
 /* Private functions */
+void delay(uint32_t cas)
+{
+	uint32_t i;
+	for(i=0;i<cas;i++)
+	{
 
+	}
+}
 
 /**
 **===========================================================================
@@ -93,7 +100,14 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	  button = (GPIOC->IDR & (0b1<<13))>>13;
+	 // button = (GPIOC->IDR & (0b1<<13))>>13;
+
+	     // zapni LED
+		  GPIOA->ODR |= 0b1<<5;
+		  delay(1000000);
+	  	 // vypni LED
+		  GPIOA->ODR &= ~(0b1<<5);
+	  	  delay(1000000);
   }
   return 0;
 }
