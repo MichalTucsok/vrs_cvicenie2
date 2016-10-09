@@ -48,6 +48,8 @@ SOFTWARE.
 */
 int main(void)
 {
+	uint8_t button;
+
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 
@@ -91,7 +93,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-
+	  button = (GPIOC->IDR & (0b1<<13))>>13;
   }
   return 0;
 }
