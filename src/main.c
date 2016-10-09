@@ -49,11 +49,17 @@ SOFTWARE.
 int main(void)
 {
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 
 	    GPIOA->MODER |=(0b01)<<(5*2);
 		GPIOA->OTYPER &= ~((0b1)<<5);
 		GPIOA->PUPDR |= (0b01)<<(5*2);
 		GPIOA->OSPEEDR |= (0b11)<<(5*2);
+
+		//nastavenie vstupu pre button
+		GPIOC->MODER &= ~((0b11)<<(13*2));
+		GPIOC->OTYPER &= ~((0b1)<<13);
+		GPIOC->PUPDR &=  ~(0b11<<(13*2));
 
 		GPIOA->ODR |= 0b1<<5;
 		GPIOA->ODR &= ~(0b1<<5);
