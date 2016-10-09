@@ -56,6 +56,7 @@ void delay(uint32_t cas)
 int main(void)
 {
 	uint8_t button;
+	uint8_t pombutton;
 
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
@@ -100,7 +101,25 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+
 	  button = (GPIOC->IDR & (0b1<<13))>>13;
+
+	  	  	  if (button==0)
+	  	  	  {
+	  	  		  pombutton++;
+	  	  		  if (pombutton % 2 == 0){
+	  	  		//	GPIOA->ODR |= 0b1<<5;
+	  	  			GPIOA->ODR ^= 0b1<<5; //zmena stavu LED (zapnute)
+	  	  		  delay(1000000);
+	  	  		  }
+	  	  		  else {
+	  	  		//	GPIOA->ODR &= ~(0b1<<5);
+	  	  			GPIOA->ODR ^= 0b1<<5; //zmena stavu LED (zapnute)
+	  	  		  delay(1000000);
+	  	  		  }
+	  	  	  }
+
+	  /* button = (GPIOC->IDR & (0b1<<13))>>13;
 
 	  	  if(button==0)
 	  	  {
@@ -109,7 +128,7 @@ int main(void)
 	  	  else
 	  	  {
 	  		  GPIOA->ODR &= ~(0b1<<5);
-	  	  }
+	  	  } */
 
 	  /*   // zapni LED
 		  GPIOA->ODR |= 0b1<<5;
